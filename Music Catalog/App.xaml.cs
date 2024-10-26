@@ -1,14 +1,82 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using System.Windows;
+
+using DotNetEnv;
+
+using MusicCatalog.Data;
+
+//namespace MusicCatalog;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+//public partial class App : Application
+//{
+//    protected override void OnStartup(StartupEventArgs e)
+//    {
+//        base.OnStartup(e);
+
+//        Console.WriteLine("OnStartup is executing...");
+
+//        Env.Load();
+//        var dg = new Utility.DataGen();
+
+//        // !! Doesn't work for some reason
+//        var connectionString = $"Host={Environment.GetEnvironmentVariable("HOST")};Port={Environment.GetEnvironmentVariable("PORT")};Username={Environment.GetEnvironmentVariable("POSTGRES_USER")};Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")};Database={Environment.GetEnvironmentVariable("POSTGRES_DB")}";
+
+//        using (var context = new MusicCatalogContext())
+//        {
+//            //RemoveData(context);
+//            dg.GenerateSampleData(context);
+//        }
+//    }
+//}
+
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace Music_Catalog
+using MusicCatalog.Views;
+using MusicCatalog.Models;
+using MusicCatalog.Services;
+using MusicCatalog.Services.SearchStrategy;
+using MusicCatalog.ViewModels;
+
+namespace MusicCatalog;
+
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public new static IServiceProvider Current { get; private set; }
+
+    protected override void OnStartup(StartupEventArgs e)
     {
+        base.OnStartup(e);
+
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
+
+        Env.Load();
+        var dg = new Utility.DataGen();
+
+        Current = serviceCollection.BuildServiceProvider();
+
+        using (var context = new MusicCatalogContext())
+        {
+            //RemoveData(context);
+            dg.GenerateSampleData(context);
+        }
+
+        var searchPage = Current.GetRequiredService<SearchPage>();
+        searchPage.Show();
     }
 
+    private void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton<MusicCatalogContext>();
+        services.AddSingleton<ISearchStrategy<Artist>, ArtistSearchStrategy>();
+        services.AddSingleton<ISearchStrategy<Album>, AlbumSearchStrategy>();
+        services.AddSingleton<ISearchStrategy<Playlist>, PlaylistSearchStrategy>();
+        services.AddSingleton<ISearchStrategy<Song>, SongSearchStrategy>();
+        services.AddSingleton<SearchService>();
+        services.AddSingleton<SearchViewModel>();
+        services.AddSingleton<SearchPage>();
+    }
 }
