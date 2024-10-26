@@ -5,54 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
-using Music_Catalog.Entities;
+using Music_Catalog.Models;
 
 namespace Music_Catalog.Data;
 
 public class MusicCatalogContext: DbContext
 {
-    private readonly string? _connectionString;
-
     public DbSet<Artist> Artists { get; set; }
     public DbSet<Album> Albums { get; set; }
     public DbSet<Song> Songs { get; set; }
     public DbSet<Playlist> Playlists { get; set; }
 
-    public MusicCatalogContext() 
-    {
-    }
-
+    public MusicCatalogContext() {}
 
     public MusicCatalogContext(DbContextOptions<MusicCatalogContext> options) 
-        : base(options)
-    {
-    }
+        : base(options) {}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
+            // TODO Kinda weird...
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=yourpassword;Database=music_catalog_db");
         }
     }
-    
-    //public MusicCatalogContext(string connectionString) 
-    //    : base() 
-    //{
-    //    _connectionString = connectionString;
-    //}
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    if (!string.IsNullOrEmpty(_connectionString))
-    //    {
-    //        optionsBuilder.UseNpgsql(_connectionString);
-    //    }
-    //    else
-    //    {
-    //        // TODO kinda weird...
-    //        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=yourpassword;Database=music_catalog_db");
-    //    }
-    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

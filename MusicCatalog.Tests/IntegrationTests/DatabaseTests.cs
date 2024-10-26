@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xunit;
 using Music_Catalog.Data;
-using Music_Catalog.Entities;
+using Music_Catalog.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MusicCatalog.Tests.IntegrationTests;

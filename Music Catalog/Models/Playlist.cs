@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 
-namespace Music_Catalog.Entities;
+namespace Music_Catalog.Models;
 
-public class Album
+public class Playlist
 {
     public int Id { get; set; }
     public string? Name { get; set; }
-    public int ArtistId { get; set; }
-    public required Artist Artist { get; set; }
     public required List<Song> Songs { get; set; }
+
+
 }
