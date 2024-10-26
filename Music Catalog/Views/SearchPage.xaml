@@ -67,19 +67,7 @@
                         <TextBox Text="{Binding YearQuery, UpdateSourceTrigger=PropertyChanged}"/>
                         
                         <Label Content="Lowest rating:"/>
-                        <ComboBox SelectedItem="{Binding RatingQuery}">
-                            <ComboBoxItem Content="0.0"/>
-                            <ComboBoxItem Content="0.5"/>
-                            <ComboBoxItem Content="1.0"/>
-                            <ComboBoxItem Content="1.5"/>
-                            <ComboBoxItem Content="2.0"/>
-                            <ComboBoxItem Content="2.5"/>
-                            <ComboBoxItem Content="3.0"/>
-                            <ComboBoxItem Content="3.5"/>
-                            <ComboBoxItem Content="4.0"/>
-                            <ComboBoxItem Content="4.5"/>
-                            <ComboBoxItem Content="5.0"/>
-                        </ComboBox>
+                        <ComboBox SelectedItem="{Binding RatingQuery}" ItemsSource="{Binding Ratings}"/>
                     </StackPanel>
                 </TabItem>
             </TabControl>

@@ -19,10 +19,10 @@ namespace MusicCatalog.ViewModels
         private SearchQuery _searchQuery; 
 
         public ObservableCollection<object> Items { get; set; }
+        public ObservableCollection<double> Ratings { get; set; }
 
         public string ArtistNameQuery
         {
-            get => _searchQuery.ArtistName ?? "";
             set
             {
                 _searchQuery.ArtistName = value;
@@ -79,7 +79,7 @@ namespace MusicCatalog.ViewModels
         {
             set
             {
-                _searchQuery.Rating = value;
+                _searchQuery.Rating = double.TryParse(value.ToString(), out double rating) ? (double?)rating : null;
                 DebouncedSearch();
             }
         }
@@ -95,6 +95,7 @@ namespace MusicCatalog.ViewModels
             _searchContext = new SearchContext();
 
             Items = [];
+            Ratings = new ObservableCollection<double> { 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0 };
 
             SearchCommand = new RelayCommand(Search);
             ItemSelectedCommand = new RelayCommand(ItemSelected);

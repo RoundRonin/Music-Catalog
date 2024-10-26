@@ -162,4 +162,21 @@ public class SongSearchStrategyTests
         Assert.Equal(2021, ((Song)results.First()).ReleaseYear);
         Assert.Equal(4.5, ((Song)results.First()).Rating);
     }
+
+    [Fact]
+    public void Search_DoesntFindSongsByCriteria()
+    {
+        var strategy = new SongSearchStrategy();
+        var searchQuery = new SearchQuery
+        {
+            SongName = "Test Song 1",
+            Genre = "Pop",
+            Year = 2021,
+            Rating = 4.5
+        };
+        var results = strategy.Search(searchQuery, _fixture.Context);
+
+        Assert.Empty(results);
+    }
+
 }

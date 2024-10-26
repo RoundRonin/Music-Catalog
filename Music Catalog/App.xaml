@@ -5,5 +5,5 @@
              StartupUri="Views/SearchPage.xaml">
     <Application.Resources>
 
-            </Application.Resources>
+    </Application.Resources>
 </Application>
