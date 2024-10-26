@@ -2,7 +2,7 @@
 using MusicCatalog.Models;
 using MusicCatalog.Models.Factories;
 using System.Linq;
-using MusicCatalog.ViewModels.SearchStrategy;
+using MusicCatalog.Services.SearchStrategy;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using System.Collections.Generic;

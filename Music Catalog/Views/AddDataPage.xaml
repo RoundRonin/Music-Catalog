@@ -1,0 +1,57 @@
+﻿<Page x:Class="MusicCatalog.Views.AddDataPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Add Data">
+    <Grid>
+        <ScrollViewer>
+        <StackPanel>
+            <TextBlock Text="Add New Artist" FontSize="20" Margin="10"/>
+            <StackPanel>
+                <Label Content="Artist Name:"/>
+                <TextBox Text="{Binding ArtistName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Button Content="Add Artist" Command="{Binding AddArtistCommand}" Margin="10"/>
+            </StackPanel>
+
+            <TextBlock Text="Add New Album" FontSize="20" Margin="10"/>
+            <StackPanel>
+                <Label Content="Album Name:"/>
+                <TextBox Text="{Binding AlbumName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Label Content="Artist:"/>
+                <ComboBox ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist}" DisplayMemberPath="Name" Margin="10"/>
+                <Button Content="Add Album" Command="{Binding AddAlbumCommand}" Margin="10"/>
+            </StackPanel>
+
+            <TextBlock Text="Add New Song" FontSize="20" Margin="10"/>
+            <StackPanel>
+                <Label Content="Song Name:"/>
+                <TextBox Text="{Binding SongName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Label Content="Genre:"/>
+                <TextBox Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Label Content="Year:"/>
+                <TextBox Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Label Content="Rating:"/>
+                <TextBox Text="{Binding Rating, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Label Content="Album:"/>
+                <ComboBox ItemsSource="{Binding Albums}" SelectedItem="{Binding SelectedAlbum}" DisplayMemberPath="Name" Margin="10"/>
+                <Button Content="Add Song" Command="{Binding AddSongCommand}" Margin="10"/>
+            </StackPanel>
+
+            <TextBlock Text="Create New Playlist" FontSize="20" Margin="10"/>
+            <StackPanel>
+                <Label Content="Playlist Name:"/>
+                <TextBox Text="{Binding NewPlaylistName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Button Content="Create Playlist" Command="{Binding CreatePlaylistCommand}" Margin="10"/>
+            </StackPanel>
+
+            <TextBlock Text="Add Song to Playlist" FontSize="20" Margin="10"/>
+            <StackPanel>
+                <Label Content="Playlist:"/>
+                <ComboBox ItemsSource="{Binding Playlists}" SelectedItem="{Binding SelectedPlaylist}" DisplayMemberPath="Name" Margin="10"/>
+                <Label Content="Song:"/>
+                <ComboBox ItemsSource="{Binding ExistingSongs}" SelectedItem="{Binding SelectedSong}" DisplayMemberPath="Name" Margin="10"/>
+                <Button Content="Add Song to Playlist" Command="{Binding AddSongToPlaylistCommand}" Margin="10"/>
+            </StackPanel>
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

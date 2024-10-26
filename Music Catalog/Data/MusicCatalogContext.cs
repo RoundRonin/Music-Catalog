@@ -34,13 +34,11 @@ public class MusicCatalogContext: DbContext
     {
         modelBuilder.Entity<Album>()
             .HasMany(a => a.Songs)
-            .WithOne(s => s.Album)
-            .HasForeignKey(s => s.AlbumId);
+            .WithOne(s => s.Album);
 
         modelBuilder.Entity<Artist>()
             .HasMany(a => a.Albums)
-            .WithOne(al => al.Artist)
-            .HasForeignKey(al => al.ArtistId);
+            .WithOne(al => al.Artist);
 
         modelBuilder.Entity<Playlist>()
             .HasMany(p => p.Songs)
