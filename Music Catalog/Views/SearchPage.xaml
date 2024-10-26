@@ -29,7 +29,7 @@
         
         <!-- Sidebar (Right) -->
         <Grid Grid.Column="1">
-            <TabControl>
+            <TabControl SelectedItem="{Binding SelectedTabItem, Mode=TwoWay}">
                 <!-- Artists Tab -->
                 <TabItem Header="Artists">
                     <StackPanel>
