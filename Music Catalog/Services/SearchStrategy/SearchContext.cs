@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using MusicCatalog.Data;
 
-namespace MusicCatalog.ViewModels.SearchStrategy;
+namespace MusicCatalog.Services.SearchStrategy;
 
 
 public class SearchContext
 {
-    private ISearchStrategy? _strategy;
+    private ISearchStrategy<object>? _strategy;
 
-    public void SetStrategy(ISearchStrategy strategy)
+    public void SetStrategy(ISearchStrategy<object> strategy)
     {
         _strategy = strategy;
     }

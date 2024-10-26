@@ -1,8 +1,7 @@
 ﻿<Application x:Class="MusicCatalog.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MusicCatalog.ViewModels"
-             StartupUri="Views/SearchPage.xaml">
+             xmlns:local="clr-namespace:MusicCatalog.ViewModels">
     <Application.Resources>
 
     </Application.Resources>

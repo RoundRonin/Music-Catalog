@@ -1,17 +1,10 @@
-﻿using MusicCatalog.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicCatalog.ViewModels.SearchStrategy;
-
-
-public interface ISearchStrategy
-{
-    IEnumerable<object> Search(SearchQuery searchQuery, MusicCatalogContext context);
-}
+namespace MusicCatalog.Services.SearchStrategy;
 public class SearchQuery
 {
     public string? ArtistName { get; set; }
@@ -26,6 +19,4 @@ public class SearchQuery
     {
         return $"{ArtistName};{AlbumName};{PlaylistName};{SongName};{Genre};{Year};{Rating}";
     }
-
 }
-

@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using MusicCatalog.Data;
 using MusicCatalog.Models;
 
-namespace MusicCatalog.ViewModels.SearchStrategy;
+namespace MusicCatalog.Services.SearchStrategy;
 using System.Diagnostics;
 
 
-public class SongSearchStrategy : ISearchStrategy
+public class SongSearchStrategy : ISearchStrategy<Song>
 {
-    public IEnumerable<object> Search(SearchQuery searchQuery, MusicCatalogContext context)
+    public IEnumerable<Song> Search(SearchQuery searchQuery, MusicCatalogContext context)
     {
         Debug.WriteLine(searchQuery.ToString());
         return context.Songs.Where(s =>

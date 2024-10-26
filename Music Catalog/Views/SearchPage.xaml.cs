@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 
 using MusicCatalog.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MusicCatalog.Views;
 
@@ -22,6 +23,11 @@ public partial class SearchPage : Window
     public SearchPage()
     {
         InitializeComponent();
-        DataContext = new SearchViewModel();
+        DataContext = App.Current.GetService<SearchViewModel>();
+    }
+    public SearchPage(SearchViewModel viewModel)
+    {
+        InitializeComponent();
+        DataContext = viewModel;
     }
 }
