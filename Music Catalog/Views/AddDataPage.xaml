@@ -35,6 +35,22 @@
                 <ComboBox ItemsSource="{Binding Albums}" SelectedItem="{Binding SelectedAlbum}" DisplayMemberPath="Name" Margin="10"/>
                 <Button Content="Add Song" Command="{Binding AddSongCommand}" Margin="10"/>
             </StackPanel>
+
+            <TextBlock Text="Create New Playlist" FontSize="20" Margin="10"/>
+            <StackPanel>
+                <Label Content="Playlist Name:"/>
+                <TextBox Text="{Binding NewPlaylistName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <Button Content="Create Playlist" Command="{Binding CreatePlaylistCommand}" Margin="10"/>
+            </StackPanel>
+
+            <TextBlock Text="Add Song to Playlist" FontSize="20" Margin="10"/>
+            <StackPanel>
+                <Label Content="Playlist:"/>
+                <ComboBox ItemsSource="{Binding Playlists}" SelectedItem="{Binding SelectedPlaylist}" DisplayMemberPath="Name" Margin="10"/>
+                <Label Content="Song:"/>
+                <ComboBox ItemsSource="{Binding ExistingSongs}" SelectedItem="{Binding SelectedSong}" DisplayMemberPath="Name" Margin="10"/>
+                <Button Content="Add Song to Playlist" Command="{Binding AddSongToPlaylistCommand}" Margin="10"/>
+            </StackPanel>
         </StackPanel>
         </ScrollViewer>
     </Grid>

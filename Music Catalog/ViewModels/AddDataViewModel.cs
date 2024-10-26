@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows;
 
 using MusicCatalog.Models;
 using MusicCatalog.Models.Factories;
@@ -18,6 +20,13 @@ namespace MusicCatalog.ViewModels
 
         public ObservableCollection<Artist> Artists { get; set; }
         public ObservableCollection<Album> Albums { get; set; }
+        public ObservableCollection<Playlist> Playlists { get; set; }
+        public ObservableCollection<Song> ExistingSongs { get; set; }
+
+        public Playlist SelectedPlaylist { get; set; }
+        public Song SelectedSong { get; set; }
+        public string NewPlaylistName { get; set; }
+
 
         public string ArtistName { get; set; }
         public string AlbumName { get; set; }
@@ -48,6 +57,8 @@ namespace MusicCatalog.ViewModels
             }
         }
 
+        public ICommand CreatePlaylistCommand { get; }
+        public ICommand AddSongToPlaylistCommand { get; }
         public ICommand AddArtistCommand { get; }
         public ICommand AddAlbumCommand { get; }
         public ICommand AddSongCommand { get; }
@@ -61,13 +72,17 @@ namespace MusicCatalog.ViewModels
 
             Artists = new ObservableCollection<Artist>(_context.Artists.ToList());
             Albums = new ObservableCollection<Album>(_context.Albums.ToList());
+            Playlists = new ObservableCollection<Playlist>(_context.Playlists.ToList());
+            ExistingSongs = new ObservableCollection<Song>(_context.Songs.ToList());
 
             AddArtistCommand = new RelayCommand(AddArtist);
             AddAlbumCommand = new RelayCommand(AddAlbum);
             AddSongCommand = new RelayCommand(AddSong);
+            CreatePlaylistCommand = new RelayCommand(CreatePlaylist);
+            AddSongToPlaylistCommand = new RelayCommand(AddSongToPlaylist); 
         }
 
-          private void AddArtist(object parameter)
+        private void AddArtist(object parameter)
         {
             var artist = _artistFactory.CreateArtist(ArtistName);
             _context.Artists.Add(artist);
@@ -92,17 +107,45 @@ namespace MusicCatalog.ViewModels
         {
             if (SelectedAlbum != null)
             {
-                var song = _songFactory.CreateSong(
-                    SongName,
-                    Genre,
-                    double.TryParse(Rating, out var rating) ? rating : 0,
-                    int.TryParse(Year, out var year) ? year : 0,
-                    SelectedAlbum
-                );
-                _context.Songs.Add(song);
+                try
+                {
+                    var song = _songFactory.CreateSong(
+                        SongName,
+                        Genre,
+                        double.TryParse(Rating, out var rating) ? rating : 0,
+                        int.TryParse(Year, out var year) ? year : 0,
+                        SelectedAlbum
+                    );
+
+                    _context.Songs.Add(song);
+                    _context.SaveChanges();
+                    ResetSongFields();
+                    LoadArtists();
+                }
+                catch (ArgumentException ex)
+                {
+                    ShowAlert("Validation Error", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+        private void CreatePlaylist(object parameter)
+        {
+            var playlist = new Playlist { Name = NewPlaylistName, Songs = new List<Song>() };
+            _context.Playlists.Add(playlist);
+            _context.SaveChanges();
+            Playlists.Add(playlist);
+        }
+
+        private void AddSongToPlaylist(object parameter)
+        {
+            if (SelectedPlaylist != null && SelectedSong != null)
+            {
+                SelectedPlaylist.Songs.Add(SelectedSong);
                 _context.SaveChanges();
-                ResetSongFields();
-                LoadArtists();
             }
         }
 
@@ -133,6 +176,11 @@ namespace MusicCatalog.ViewModels
             OnPropertyChanged(nameof(Rating));
             OnPropertyChanged(nameof(SelectedAlbum));
         } 
+        private void ResetPlaylistFields()
+        {
+            NewPlaylistName = string.Empty;
+            OnPropertyChanged(nameof(NewPlaylistName));
+        }
         private void LoadArtists()
         {
             Artists.Clear();
@@ -146,6 +194,11 @@ namespace MusicCatalog.ViewModels
             {
                 Albums.Add(album);
             }
+        }
+
+        private void ShowAlert(string title, string message)
+        {
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
