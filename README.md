@@ -11,6 +11,8 @@ A WPF application for managing a Music Catalog, built with .NET and using Entity
 
 ## Getting Started
 
+The important thing is to use Package Manager Console if you are using Visual Studio
+
 ### Clone the Repository
 
 ```sh
@@ -34,7 +36,11 @@ To stop:
 docker-compose down
 ```
 
-Create Database: #TODO
+If the migrations are not created, create database:
+```sh
+Add-Migration InitialCreate
+Update-Database
+```
 
 ### Install Dependencies
 Restore NuGet Packages: Open the solution in Visual Studio and restore NuGet packages.
@@ -61,7 +67,7 @@ dotnet run
 Project follows MVVM model as is common with WPF. Project also uses Entinty Framework to interact with PostgreSQL database.
 
 Data/: Contains the MusicCatalogContext class for Entity Framework.
-Entities/: Contains entity classes (Artist.cs, Album.cs, Song.cs, Compilation.cs).
+Entities/: Contains entity classes (Artist.cs, Album.cs, Song.cs, Playlist.cs).
 Views/: Contains WPF XAML files for the UI.
 ViewModels/: Contains ViewModel classes for MVVM.
 Models/: Contains model classes if any additional business logic is needed.
