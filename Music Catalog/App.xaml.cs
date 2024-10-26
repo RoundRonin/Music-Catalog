@@ -36,6 +36,7 @@ using System.Windows;
 
 using MusicCatalog.Views;
 using MusicCatalog.Models;
+using MusicCatalog.Models.Factories;
 using MusicCatalog.Services;
 using MusicCatalog.Services.SearchStrategy;
 using MusicCatalog.ViewModels;
@@ -64,8 +65,10 @@ public partial class App : Application
             dg.GenerateSampleData(context);
         }
 
+        var mainWindow = Current.GetRequiredService<MainWindow>();
         var searchPage = Current.GetRequiredService<SearchPage>();
-        searchPage.Show();
+        var addPage = Current.GetRequiredService<AddDataPage>();
+        mainWindow.Show();
     }
 
     private void ConfigureServices(IServiceCollection services)
@@ -77,6 +80,12 @@ public partial class App : Application
         services.AddSingleton<ISearchStrategy<Song>, SongSearchStrategy>();
         services.AddSingleton<SearchService>();
         services.AddSingleton<SearchViewModel>();
+        services.AddSingleton<AddDataViewModel>();
+        services.AddSingleton<MainWindow>();
         services.AddSingleton<SearchPage>();
+        services.AddSingleton<AddDataPage>();
+        services.AddSingleton<IArtistFactory, ArtistFactory>(); // Register ArtistFactory
+        services.AddSingleton<IAlbumFactory, AlbumFactory>();   // Register AlbumFactory
+        services.AddSingleton<ISongFactory, SongFactory>();
     }
 }

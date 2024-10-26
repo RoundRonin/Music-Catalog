@@ -18,7 +18,7 @@ namespace MusicCatalog.Views;
 /// <summary>
 /// Interaction logic for SearchPage.xaml
 /// </summary>
-public partial class SearchPage : Window
+public partial class SearchPage : Page 
 {
     public SearchPage()
     {

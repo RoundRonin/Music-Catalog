@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using MusicCatalog.Services;
 using MusicCatalog.Services.SearchStrategy;
 using MusicCatalog.Utility;
+using MusicCatalog.ViewModels.Utility;
 
 namespace MusicCatalog.ViewModels;
 
