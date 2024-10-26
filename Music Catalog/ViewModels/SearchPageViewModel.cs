@@ -26,7 +26,6 @@ namespace MusicCatalog.ViewModels
             set
             {
                 _searchQuery.ArtistName = value;
-                //OnPropertyChanged(nameof(ArtistNameQuery));
                 DebouncedSearch();
             }
         }
@@ -36,7 +35,6 @@ namespace MusicCatalog.ViewModels
             set
             {
                 _searchQuery.AlbumName = value;
-                //OnPropertyChanged(nameof(AlbumNameQuery));
                 DebouncedSearch();
             }
         }
@@ -46,7 +44,6 @@ namespace MusicCatalog.ViewModels
             set
             {
                 _searchQuery.PlaylistName = value;
-                //OnPropertyChanged(nameof(PlaylistNameQuery));
                 DebouncedSearch();
             }
         }
@@ -56,7 +53,6 @@ namespace MusicCatalog.ViewModels
             set
             {
                 _searchQuery.SongName = value;
-                //OnPropertyChanged(nameof(SongNameQuery));
                 DebouncedSearch();
             }
         }
@@ -66,7 +62,6 @@ namespace MusicCatalog.ViewModels
             set
             {
                 _searchQuery.Genre = value;
-                //OnPropertyChanged(nameof(GenreQuery));
                 DebouncedSearch();
             }
         }
@@ -76,7 +71,6 @@ namespace MusicCatalog.ViewModels
             set
             {
                 _searchQuery.Year = int.TryParse(value, out int year) ? (int?)year : null;
-                //OnPropertyChanged(nameof(YearQuery));
                 DebouncedSearch();
             }
         }
@@ -86,7 +80,6 @@ namespace MusicCatalog.ViewModels
             set
             {
                 _searchQuery.Rating = value;
-                //OnPropertyChanged(nameof(RatingQuery));
                 DebouncedSearch();
             }
         }
@@ -145,29 +138,7 @@ namespace MusicCatalog.ViewModels
             App.Current.Dispatcher.Invoke(() =>
             {
                 foreach (var item in results) Items.Add(item);
-
-                // Clear all queries after search
-                //ArtistNameQuery = AlbumNameQuery = PlaylistNameQuery = SongNameQuery = GenreQuery = YearQuery = string.Empty;
-                //RatingQuery = 0;
-                //OnPropertyChanged(nameof(ArtistNameQuery));
-                //OnPropertyChanged(nameof(AlbumNameQuery));
-                //OnPropertyChanged(nameof(PlaylistNameQuery));
-                //OnPropertyChanged(nameof(SongNameQuery));
-                //OnPropertyChanged(nameof(GenreQuery));
-                //OnPropertyChanged(nameof(YearQuery));
-                //OnPropertyChanged(nameof(RatingQuery));
             });
-    
-            // Clear all queries after search
-            //ArtistNameQuery = AlbumNameQuery = PlaylistNameQuery = SongNameQuery = GenreQuery = YearQuery = string.Empty;
-            //RatingQuery = 0;
-            //OnPropertyChanged(nameof(ArtistNameQuery));
-            //OnPropertyChanged(nameof(AlbumNameQuery));
-            //OnPropertyChanged(nameof(PlaylistNameQuery));
-            //OnPropertyChanged(nameof(SongNameQuery));
-            //OnPropertyChanged(nameof(GenreQuery));
-            //OnPropertyChanged(nameof(YearQuery));
-            //OnPropertyChanged(nameof(RatingQuery));
         }
 
 
