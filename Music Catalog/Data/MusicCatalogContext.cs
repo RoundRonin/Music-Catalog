@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
-using Music_Catalog.Models;
+using MusicCatalog.Models;
 
-namespace Music_Catalog.Data;
+namespace MusicCatalog.Data;
 
 public class MusicCatalogContext: DbContext
 {

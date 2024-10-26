@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Music_Catalog.Factories;
+namespace MusicCatalog.Models.Factories;
 public class ArtistFactory : IArtistFactory
 {
-    public Music_Catalog.Models.Artist CreateArtist(string name)
+    public Artist CreateArtist(string name)
     {
-        return new Music_Catalog.Models.Artist
+        return new Artist
         {
             Name = name,
             Albums = []

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Music_Catalog.Models;
+namespace MusicCatalog.Models;
 
 public class Artist
 {

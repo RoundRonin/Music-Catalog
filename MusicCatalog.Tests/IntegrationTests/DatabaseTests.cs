@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xunit;
-using Music_Catalog.Data;
-using Music_Catalog.Models;
+using MusicCatalog.Data;
+using MusicCatalog.Models;
+using MusicCatalog.Models.Factories;
 using Microsoft.EntityFrameworkCore;
 
 namespace MusicCatalog.Tests.IntegrationTests;
@@ -26,34 +27,19 @@ public class DatabaseTests
     {
         using (var context = GetInMemoryDbContext())
         {
-            var artist = new Artist
-            {
-                Name = "Test Artist",
-                Albums = new List<Album>()
-            };
+            var artistFactory = new ArtistFactory();
+            var albumFactory = new AlbumFactory();
+            var songFactory = new SongFactory();
+            var playlistFactory = new PlaylistFactory();
 
-            var album = new Album
-            {
-                Name = "Test Album",
-                Artist = artist,
-                Songs = new List<Song>()
-            };
+            var artist = artistFactory.CreateArtist("Test Artist");
+            var album = albumFactory.CreateAlbum("Test Album", artist);
             artist.Albums.Add(album);
 
-            var song = new Song
-            {
-                Name = "Test Song",
-                Genre = "Rock",
-                Album = album,
-                Playlists = new List<Playlist>()
-            };
+            var song = songFactory.CreateSong("Test Song", "Rock", 4.5, 2021, album);
             album.Songs.Add(song);
 
-            var playlist = new Playlist
-            {
-                Name = "Test Playlist",
-                Songs = new List<Song> { song }
-            };
+            var playlist = playlistFactory.CreatePlaylist("Test Playlist", new List<Song> { song });
             song.Playlists.Add(playlist);
 
             context.Artists.Add(artist);

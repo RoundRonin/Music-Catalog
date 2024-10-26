@@ -9,16 +9,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Music_Catalog
+using MusicCatalog.ViewModels;
+
+namespace MusicCatalog.Views;
+
+/// <summary>
+/// Interaction logic for SearchPage.xaml
+/// </summary>
+public partial class SearchPage : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public SearchPage()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = new SearchViewModel();
     }
 }

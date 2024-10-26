@@ -1,0 +1,88 @@
+﻿<Window x:Class="MusicCatalog.Views.SearchPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Music: Search" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="160"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Main Area (Left) -->
+        <Grid Grid.Column="0">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding Items}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.ItemSelectedCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" />
+                                    <!-- <Image Source="{Binding ImagePlaceholder}" Width="100" Height="100"/> -->
+                                    <Image Width="100" Height="100"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        
+        <!-- Sidebar (Right) -->
+        <Grid Grid.Column="1">
+            <TabControl>
+                <!-- Artists Tab -->
+                <TabItem Header="Artists">
+                    <StackPanel>
+                        <Label Content="Artist Name:"/>
+                        <TextBox Text="{Binding ArtistNameQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </TabItem>
+                
+                <!-- Albums Tab -->
+                <TabItem Header="Albums">
+                    <StackPanel>
+                        <Label Content="Album Name:"/>
+                        <TextBox Text="{Binding AlbumNameQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </TabItem>
+                
+                <!-- Playlists Tab -->
+                <TabItem Header="Playlists">
+                    <StackPanel>
+                        <Label Content="Playlist Name:"/>
+                        <TextBox Text="{Binding PlaylistNameQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </TabItem>
+                
+                <!-- Songs Tab -->
+                <TabItem Header="Songs">
+                    <StackPanel>
+                        <Label Content="Song Name:"/>
+                        <TextBox Text="{Binding SongNameQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <Label Content="Genre:"/>
+                        <TextBox Text="{Binding GenreQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <Label Content="Year:"/>
+                        <TextBox Text="{Binding YearQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <Label Content="Lowest rating:"/>
+                        <ComboBox SelectedItem="{Binding RatingQuery}">
+                            <ComboBoxItem Content="0.0"/>
+                            <ComboBoxItem Content="0.5"/>
+                            <ComboBoxItem Content="1.0"/>
+                            <ComboBoxItem Content="1.5"/>
+                            <ComboBoxItem Content="2.0"/>
+                            <ComboBoxItem Content="2.5"/>
+                            <ComboBoxItem Content="3.0"/>
+                            <ComboBoxItem Content="3.5"/>
+                            <ComboBoxItem Content="4.0"/>
+                            <ComboBoxItem Content="4.5"/>
+                            <ComboBoxItem Content="5.0"/>
+                        </ComboBox>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>

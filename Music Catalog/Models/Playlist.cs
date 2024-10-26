@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 
-namespace Music_Catalog.Models;
+namespace MusicCatalog.Models;
 
 public class Playlist
 {

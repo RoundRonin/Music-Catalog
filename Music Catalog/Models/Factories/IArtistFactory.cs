@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Music_Catalog.Factories;
+namespace MusicCatalog.Models.Factories;
 
 public interface IArtistFactory
 {
-    Music_Catalog.Models.Artist CreateArtist(string name);
+    Artist CreateArtist(string name);
 }
 
