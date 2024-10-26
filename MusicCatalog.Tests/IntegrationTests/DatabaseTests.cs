@@ -15,7 +15,10 @@ public class DatabaseTests
 {
     private MusicCatalogContext GetInMemoryDbContext()
     {
-        return new MusicCatalogContext();
+        var options = new DbContextOptionsBuilder<MusicCatalogContext>()
+            .UseInMemoryDatabase(databaseName: "TestDatabase")
+            .Options;
+        return new MusicCatalogContext(options);
     }
 
     [Fact]

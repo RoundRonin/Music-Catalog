@@ -22,23 +22,37 @@ public class MusicCatalogContext: DbContext
     {
     }
 
-    public MusicCatalogContext(string connectionString) 
-        : base() 
+
+    public MusicCatalogContext(DbContextOptions<MusicCatalogContext> options) 
+        : base(options)
     {
-        _connectionString = connectionString;
     }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!string.IsNullOrEmpty(_connectionString))
+        if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql(_connectionString);
-        }
-        else
-        {
-            // TODO kinda weird...
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=yourpassword;Database=music_catalog_db");
         }
     }
+    
+    //public MusicCatalogContext(string connectionString) 
+    //    : base() 
+    //{
+    //    _connectionString = connectionString;
+    //}
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    if (!string.IsNullOrEmpty(_connectionString))
+    //    {
+    //        optionsBuilder.UseNpgsql(_connectionString);
+    //    }
+    //    else
+    //    {
+    //        // TODO kinda weird...
+    //        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=yourpassword;Database=music_catalog_db");
+    //    }
+    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
